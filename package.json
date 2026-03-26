@@ -1,0 +1,18 @@
+{
+  "name": "echo-performance-profiler",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:init": "wrangler d1 execute echo-performance-profiler --file=schema.sql --remote"
+  },
+  "dependencies": {
+    "hono": "^4.7.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250313.0",
+    "typescript": "^5.8.0",
+    "wrangler": "^4.0.0"
+  }
+}

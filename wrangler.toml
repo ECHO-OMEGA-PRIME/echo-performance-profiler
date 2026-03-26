@@ -1,0 +1,23 @@
+name = "echo-performance-profiler"
+main = "src/index.ts"
+compatibility_date = "2025-03-14"
+
+[triggers]
+crons = ["*/5 * * * *", "0 * * * *", "0 6 * * *"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "echo-performance-profiler"
+database_id = "879ddbc4-09f0-4462-a524-b04b4e406d71"
+
+[[kv_namespaces]]
+binding = "CACHE"
+id = "f78d7d73b2324252840fa6b7f7aeb8f0"
+
+[[services]]
+binding = "SHARED_BRAIN"
+service = "echo-shared-brain"
+
+[[services]]
+binding = "ALERT_ROUTER"
+service = "echo-alert-router"
