@@ -26,7 +26,7 @@ app.use('*', async (c, next) => {
 
 // Auth middleware — skip /health
 app.use('*', async (c, next) => {
-  if (c.req.path === '/health') return next();
+  if (c.req.path === '/' || c.req.path === '/health') return next();
   if (!authenticate(c.req.header('X-Echo-API-Key') ?? null, c.env.ECHO_API_KEY)) {
     return c.json(err('Unauthorized — provide X-Echo-API-Key header'), 401);
   }
@@ -36,6 +36,8 @@ app.use('*', async (c, next) => {
 // ---------------------------------------------------------------------------
 // 1. GET /health
 // ---------------------------------------------------------------------------
+app.get("/", (c) => c.json({ service: 'echo-performance-profiler', status: 'operational' }));
+
 app.get('/health', async (c) => {
   const start = Date.now();
   let dbStatus = 'ok';
