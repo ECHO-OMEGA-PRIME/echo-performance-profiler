@@ -3,6 +3,7 @@ export interface Env {
   CACHE: KVNamespace;
   SHARED_BRAIN: Fetcher;
   ALERT_ROUTER: Fetcher;
+  ECHO_API_KEY: string;
 }
 
 export interface MetricRecord {

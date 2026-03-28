@@ -1,6 +1,6 @@
 import type { ApiResponse } from './types';
 
-const API_KEY = 'echo-omega-prime-forge-x-2026';
+// API_KEY pulled from env at runtime — never hardcoded
 
 export function ok<T>(data: T): ApiResponse<T> {
   return { success: true, data, timestamp: new Date().toISOString() };
@@ -10,9 +10,9 @@ export function err(error: string): ApiResponse {
   return { success: false, error, timestamp: new Date().toISOString() };
 }
 
-export function authenticate(header: string | null): boolean {
+export function authenticate(header: string | null, apiKey?: string): boolean {
   if (!header) return false;
-  return header === API_KEY;
+  return header === (apiKey || '');
 }
 
 /**

@@ -27,7 +27,7 @@ app.use('*', async (c, next) => {
 // Auth middleware — skip /health
 app.use('*', async (c, next) => {
   if (c.req.path === '/health') return next();
-  if (!authenticate(c.req.header('X-Echo-API-Key') ?? null)) {
+  if (!authenticate(c.req.header('X-Echo-API-Key') ?? null, c.env.ECHO_API_KEY)) {
     return c.json(err('Unauthorized — provide X-Echo-API-Key header'), 401);
   }
   return next();
