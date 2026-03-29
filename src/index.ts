@@ -4,6 +4,8 @@ import type { Env, MetricInput, MetricRecord, AggregatedMetric, PerformanceAlert
 import { ok, err, authenticate, percentile, stddev, round, ago, floorToInterval, getCache, setCache } from './utils';
 import { logger } from './logger';
 
+const ALLOWED_ORIGINS = ['https://echo-ept.com','https://www.echo-ept.com','https://echo-op.com','https://profinishusa.com','https://bgat.echo-op.com'];
+
 type HonoEnv = { Bindings: Env };
 
 const app = new Hono<HonoEnv>();
@@ -11,7 +13,7 @@ const app = new Hono<HonoEnv>();
 // ---------------------------------------------------------------------------
 // Middleware
 // ---------------------------------------------------------------------------
-app.use('*', cors({ origin: '*', allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], allowHeaders: ['Content-Type', 'X-Echo-API-Key'] }));
+app.use('*', cors({ origin: (o) => ALLOWED_ORIGINS.includes(o) ? o : ALLOWED_ORIGINS[0], allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], allowHeaders: ['Content-Type', 'X-Echo-API-Key'] }));
 
 // Security headers middleware
 app.use('*', async (c, next) => {
